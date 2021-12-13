@@ -111,9 +111,10 @@ See the full analysis in the [Jupyter Notebook](https://github.com/jennifernha/Z
 ```
 ├── data
 ├── images 
-├── Prensentation.pdf  
-├── README.md                         
-├── Zillow_times_series.ipynb              
+├── Data-Collection.ipynb  
+├── NLP-App-Sentiment-Analysis.ipnyb                        
+├── Presentation.pdf
+├── README.md             
 └── functions.py
   
   
