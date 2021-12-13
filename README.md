@@ -105,7 +105,7 @@ continued ROI growth.
 
 
 ## For More Information
-See the full analysis in the [Jupyter Notebook](https://github.com/jennifernha/Zillow-Time-Series/blob/main/Zillow-Times-Series.ipynb) or review this [presentation](https://github.com/jennifernha/Zillow-Time-Series/blob/main/Presentation.pdf). For additional info, contact Jennifer Ha at jnha1119@gmail.com
+See the full analysis in the [Jupyter Notebook](https://github.com/jennifernha/NLP-App-Reviews-Sentiment-Analysis/blob/main/NLP-App-Sentiment-Analysis.ipynb) or review this [presentation](https://github.com/jennifernha/NLP-App-Reviews-Sentiment-Analysis/blob/main/Presentation.pdf). For additional info, contact Jennifer Ha at jnha1119@gmail.com.
 ***
 ## Repository Structure
 ```
@@ -116,5 +116,3 @@ See the full analysis in the [Jupyter Notebook](https://github.com/jennifernha/Z
 ├── Presentation.pdf
 ├── README.md             
 └── functions.py
-  
-  
