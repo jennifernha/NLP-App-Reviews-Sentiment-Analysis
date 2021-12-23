@@ -19,7 +19,7 @@ from nltk.stem.wordnet import WordNetLemmatizer
 from wordcloud import WordCloud
 
 # Importa SciKit Learn packages for modeling and model evaluation
-from sklearn.linear_model import LogisticRegression, LogisticRegressionCV
+from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.svm import LinearSVC
@@ -200,7 +200,7 @@ def evaluate_model(y_test, y_train, X_test, X_train, clf, n_class=3,
         # Plot confusion matrix
         metrics.plot_confusion_matrix(clf, X_test,
                                       y_test,normalize='true',
-                                      cmap='Purples',ax=axes[0],
+                                      ax=axes[0],
                                       display_labels=['Negative', 'Positive'])
         axes[0].set_title('Confusion Matrix')
 
@@ -224,3 +224,31 @@ def evaluate_model(y_test, y_train, X_test, X_train, clf, n_class=3,
         params = pd.DataFrame(pd.Series(clf.get_params()))
         params.columns=['parameters']
         display(params)
+
+# Create function to create barplots using feature coefficients
+def barplot_series(series, title, xlabel, ylabel, palette):
+    """
+    Displays barplot of input series.
+    
+    If the argument 'params' is passed, will display a table of the 
+    parameters hyperparameters used in the model.
+
+    Args:
+        series (Series) : Series containing data to visualize.
+        title (str) : Title of plot.
+        xlabel (str) : X axis title.
+        ylabel (str) : y axis title.
+        palette : Color palette to create plot using.
+        
+    Returns:
+    
+    """
+    # Create bar plot of feature coefficients as odds.
+    fig, ax = plt.subplots(figsize=(10,10))
+
+    sns.barplot(x=series.values, y=series.index, palette=palette, 
+              ax=ax, orient='h')
+
+    ax.set_title(title)
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
