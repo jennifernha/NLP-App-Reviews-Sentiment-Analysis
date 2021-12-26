@@ -53,6 +53,37 @@ def lemmatize_tokens(tokens_list):
     lemmatizer = WordNetLemmatizer()
     tokens_lemm = [lemmatizer.lemmatize(word) for word in tokens_list]
     return tokens_lemm
+
+# Write function to create barplot of most common words
+def most_freq(tokens, n=25, figsize=(12,7)):
+    """
+    Displays bar plot of n most frequent words in a list of tokens.
+
+    Args:
+        tokens (list) : List of string tokens to plot frequency for.
+        n (int) : Number of tokens to plot.
+        figsize (float, float) : Width, height in inches.
+
+    Returns:
+        
+    """
+    # Get frequency distribution of list of tokens
+    freq = FreqDist(tokens)
+    
+    # Convert to DataFrame
+    most_frequent_tokens = pd.DataFrame(freq.most_common(n),
+                           columns=['word','count']).sort_values('count', 
+                                                                 ascending=False)
+
+    # Plot frequency distribution
+    fig, ax = plt.subplots(figsize=(10,12))
+    
+    sns.barplot(data=most_frequent_tokens, y='word', x='count', 
+                ax=ax, orient='h')
+
+    ax.set_title(f'{n} Most Frequent Words in List of Tokens')
+    ax.set_ylabel('Word')
+    ax.set_xlabel('Count')
     
 # Write functions to use to create wordclouds
 def wordcloud_prep(df_col, stopwords):
