@@ -8,108 +8,69 @@ How the world eats is changing dramatically. A little under two decades ago, res
 
 Food delivery apps are offering a more convenient way for people to get the meals that they want. Therefore, hungry users are willing to pay additional charges and delivery fees to have it delivered to their front door. These types of apps aren’t going anywhere anytime soon. More than likely, they’re here to stay — for good. 
 ***
+
 ## Business Problem
 The goal of this analysis is to determine what characteristics of Food Delivery apps currently available on the iOS App Store resonate well with the users and what can be improved. Through sentiment analysis of text reviews and their corresponding ratings, we will examine what words are more likely to indicate a positive vs a negative app review.
 The analysis will help our potential client by providing insights into how to develop a strategy for building a new mental health app that can compete with apps that have already seen success.
 ***
+
 ## Data
-The dataset for this analysis comes from [Zillow Research](https://www.zillow.com/research/data/), which contains the median home sales prices in 14,723 individual zipcodes from April 1996 through April 2018. Each row represents a unique zip code indexed with RegioinID, and contains location info and median housing sales prices for each month.
+Besides the major players based in the US, I also chose some other successful apps around the world that are still big enough to run their business in the US. I came up with a list of 10 food delivery apps and compiled the dataset for this analysis through [app review scraping](https://github.com/jennifernha/NLP-App-Reviews-Sentiment-Analysis/blob/main/Data-Collection.ipynb), which includes text reviews paired with rating out of 5 for 10 food delivery apps. 
 
+The review texts will be our independent variables, and our target variable will be the rating out of 5.
 ***
+
 ## Methods
-To begin with, this project explores zipcodes in California only (1,224 zipcodes). Then I calculated the average ROI from April 1996 to April 1998 to narrow down the list to top 10 counties. To further clean up the data before running predictions, I prepared top 10 zipcodes by selecting the zipcode with the highest average ROI in each county.
+This project conducts analysis for 3 different types of classification: 1 multi-class classification and 2 binary classifications. 
+ * Multi-class Classification: Negative (1-2), Neutral (3), Positive (4-5)
+ * Binary Classification: Negative (1-3), Positive (4-5)
+ * Binary Classification: Negative (1-2), Positive (3-5)
 
-I wanted to be mindful of some financial events that happened in the past (e.g. Housing Bubble and Great Recession, and used the [coefficient of variantion](https://www.investopedia.com/terms/c/coefficientofvariation.asp) to take risk into consideration. This is a very common method being used in finance to determine how much volatility, or risk, is assumed in comparison to the amount of return expected from investments. I also selected data in 30-70 quartiles to add some variation.
+We first explore the data to have a better understanding of the app reviews that we compiled for 10 food delivery apps, then further implement techiniques such as tokenization, lemmatization and stopword removal to analyze word frequencies prior to modeling. 
 
-For prediction, I ran some time series models, and selected the SARIMAX model that performed the best to forecast the predicted average home values for each zipcode for the next 10 years (2018-2028).
+During the modeling phase, we vectorize the review texts including individual words and bigrams as our features. Then, we run Logistic Regression and Random Forest models for multi-class sentiments,and add Support Vector Classification for binary sentiments. As the last step, we implement gridsearch for each classification type and run a final model with the best parameters to optimize model performance and address the issue of under or overfitting to the training data.
 ***
+
 ## Results
-Our results showed that below counties had the highest ROI between April 1996 and April 2018.
+### <ins>Winning Model: Logistic Regression<ins>
+![best-model-summary](./images/best-model-summary.png)
+The overall best performing model was the binary Logistic Regression model with a F1 score of 0.83. This model had a recall score of 0.89 in predicting negative sentiment and 0.74 in predicting positive sentiment.
 
-![map](./images/map1.png) 
+### <ins>WordClouds<ins>
+![wordcloud-pos](./images/wordcloud-pos.png)
 
-All counties showed at least 125% of ROI on average since 1996. Out of those counties, Orange, Alameda, and San Luis Obispo counties had the highest ROI around 200%.
+![wordcloud-neg](./images/wordcloud-neg.png)
 
-![ca_top_10](./images/ca_top10_counties.png)
+Our wordclouds show that most commonly mentioned words are very similar for both positive and negative sentiments. Such result indicates that users could be either satisfied or disappointed by order accuracy, delivery time, and customer service. There are some words related to fees and refund for the negative sentiment, which suggests service fees or delivery fees are directly tied to negative user experience. Moreover, while a refund could be the best way to make up for any issues, it still leaves a bad impression because customers easily think that a refund is a must when they are not satisfied with their experience.  
 
-Below is a ROI trend of zipcodes with the highest ROI in each county.
+### <ins>Coefficient Analysis<ins>
+![coefficient-analysis-pos](./images/ca-pos.png) 
+![coefficient-analysis-neg](./images/ca-neg.png) 
 
-![ca_top_10](./images/roi_trend.png)
-
-The metrics used to evaluate the models were RMSE since we want the lowest error between the actual and predicted price of houses. 
-
-| Zipcode | City          | County         | RMSE 
-| --------| ------------- | -------------- | ---- 
-| 92101 | San Diego       | San Diego      | $4930.90 
-| 91754 | Monterey Park   | Los Angeles    | $2522.42
-| 92866 | Orange          |Orange          | $2585.74
-| 92860 | Norco           |Riverside       | $2198.00
-| 96141 | Homewood        | Placer         | $4287.85
-| 95441 | Geyserville     | Sonoma         | $6990.77
-| 93405 | San Luis Obispo |San Luis Obispo | $3504.44
-| 95818 | Sacramento      | Sacramento     | $2829.32
-| 93003 | Ventura         | Ventura        | $1750.29
-| 94546 | Castro Valley   | Alamenda       | $4241.23 
-
+Coefficient Analysis shows that users are more likely to have positive sentiments when the apps have great customer service, are easy and convenient to use, food is delivered on time and cooked well. For negative sentiment, on the other hand, there were many words related to delayed delivery, food gone cold due to this reason, customer service,refund, and fees. 
 ***
 ## Recommendation
-Below are the top 5 zipcodes that showed the higher expected ROI than the rest, and the recommendation on short-term vs. long-term investment decisions .
+1. **Focus on building an impressive UI/UX.** From the coefficient analysis for positive words, it was evident that users were happy when using an app that was easy to use. Nowadays where there is too much information to consume, people prefer convenience and simplicity. Therefore, it is imperative to build an app that is not too complicated to use. 
 
-![map](./images/map2.png) 
+2. **Build a strong delivery operations system.** There were many words present in both coefficient analysis for positive and negative words, which means that 'delivery' is a feature that can easily influence a user's sentiment. In terms of operations, it is important that there are enough drivers ready and available to complete delivery without any delays. 
 
-**Zip code 91754 (Orange):** Buy and hold for at least 10 years due to 
-continued ROI growth.
+3. **Food quality matters.** Even though the users know that it will take longer for their food to arrive when ordering in than dining in, they still expect their food to be kept hot/cold and delicious. Therefore, I highly recommend working with restaurants on how to adjust their cooking method and packaging to serve with the best quality.
 
-           Total expected return in 1 year: 2.94%
-           Total expected return in 3 years: 8.74%
-           Total expected return in 5 years: 14.42%
-           Total expected return in 10 years: 27.90%
-![monterey](./images/monterey_park.png)                                  
-                                
-**Zip code 92860 (Riverside):** Buy and sell after 3 years as expected ROI levels out.
+4. **No more additional charges please!** It is quite common to see additional charges being applied when ordering delivery these days. However, it was evident from our analysis that people are more likely to leave bad reviews when this happens. While additional cost is unavoidable, we should seek a way to minimize the cost more competitively.
 
-           Total expected return in 1 year: 2.81%
-           Total expected return in 3 years: 4.25%
-           Total expected return in 5 years: 4.45%
-           Total expected return in 10 years: 4.49% 
-![norco](./images/norco.png)                                           
-                                  
-**Zip code 96141 (Placer):** Buy and hold for at least 10 years due to 
-continued ROI growth.
+5. **Easy access customer service.** When something goes wrong, it could be quite frustrating when it is difficult to reach the customer service. Not to mention that the quality of customer service is important, users should be able to reach the customer service without any difficulty. For example, there can be a button for customer service and giving an option to either call or email immediately about an food/delivery on the order summary page. 
 
-           Total expected return in 1 year: 9.06%
-           Total expected return in 3 years: 26.99%
-           Total expected return in 5 years: 44.99%
-           Total expected return in 10 years: 89.22%
- ![homewood](./images/homewood.png)         
-
-**Zip code 93405 (San Luis Obispo):** Buy and sell after 3-5 years as expected ROI levels out.
-
-           Total expected return in 1 year: 2.01%
-           Total expected return in 3 years: 3.55%
-           Total expected return in 5 years: 3.95%
-           Total expected return in 10 years 4.08%
- ![san_luis_obispo](./images/san_luis_obispo.png) 
-
-**Zip code 94546 (Alameda):** Buy and hold for at least 10 years due to 
-continued ROI growth.
-
-           Total expected return in 1 year: 3.19%
-           Total expected return in 3 years: 9.50%
-           Total expected return in 5 years: 15.72%
-           Total expected return in 10 years: 30.62%
- ![castro_valley](./images/castro_valley.png) 
+6. **Users don't like refunds!** While it makes sense to provide a refund when an order wasn't delivered on time or accurately, refunds are what the customers want. When placing an order through an app, users expect the correct items to be delivered on time. They are excited and hungry while waiting for their food, and it should be understandable that it could be a very disappointing experience when it gets to a point where they must receive a refund. 
 
 ***
 ## Next Steps:
-1. We can potentially add more recent data to increase the effectiveness of the model. It would be interesting to examine if any recent events like COVID-19 have affected the real estate market.
-
-2. This project was purely based on using past average home values to make predictions for the next 10 years. The analysis can be more meaningful if we could take other contributing factors for a home value, such as population, tax rate, school ranking, property size into consideration.
-
+1. Our data is currently limited to the reviews and ratings on the Apple App Store. Collecting and analyzing app reviews from the Google Play Store to examine how they compare would help us get a well-rounded idea of the sentiments of all mobile app users, as opposed to just Apple users.
+***
 
 ## For More Information
 See the full analysis in the [Jupyter Notebook](https://github.com/jennifernha/NLP-App-Reviews-Sentiment-Analysis/blob/main/NLP-App-Sentiment-Analysis.ipynb) or review this [presentation](https://github.com/jennifernha/NLP-App-Reviews-Sentiment-Analysis/blob/main/Presentation.pdf). For additional info, contact Jennifer Ha at jnha1119@gmail.com.
 ***
+
 ## Repository Structure
 ```
 ├── data
