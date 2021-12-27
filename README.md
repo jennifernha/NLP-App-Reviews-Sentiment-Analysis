@@ -6,7 +6,7 @@
 ## Overview
 How the world eats is changing dramatically. A little under two decades ago, restaurant-quality meal delivery was still largely limited to foods such as pizza and Chinese. Nowadays, food delivery has become a global market worth more than $150 billion, having more than tripled since 2017. In the United States, the market has more than doubled during the COVID-19 pandemic, following healthy historical growth of 8 percent (Source: [McKinsey](https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/ordering-in-the-rapid-evolution-of-food-delivery)).
 
-Food delivery apps are offering a more convenient way for people to get the meals that they want. Therefore, hungry users are willing to pay additional charges and delivery fees to have it delivered to their front door. These types of apps aren’t going anywhere anytime soon. More than likely, they’re here to stay — for good. 
+With this emerging trend, food delivery apps are also booming and offers a more convenient way for people to get the meals that they want. Therefore, hungry users are willing to pay additional charges and delivery fees to have it delivered to their front door. These types of apps aren’t going anywhere anytime soon. More than likely, they’re here to stay — for good. 
 ***
 
 ## Business Problem
@@ -50,7 +50,7 @@ Our wordclouds show that most commonly mentioned words are very similar for both
 Coefficient Analysis shows that users are more likely to have positive sentiments when the apps have great customer service, are easy and convenient to use, food is delivered on time and cooked well. For negative sentiment, on the other hand, there were many words related to delayed delivery, food gone cold due to this reason, customer service,refund, and fees. 
 ***
 ## Recommendation
-1. **Focus on building an impressive UI/UX.** From the coefficient analysis for positive words, it was evident that users were happy when using an app that was easy to use. Nowadays where there is too much information to consume, people prefer convenience and simplicity. Therefore, it is imperative to build an app that is not too complicated to use. 
+1. **Focus on building an impressive UI/UX.** From the coefficient analysis for positive words, it was evident that users were happy when using an app that was easy to use. Nowadays  there is too much information to consume so people prefer convenience and simplicity. Therefore, it is imperative to build an app that is not too complicated to use. 
 
 2. **Build a strong delivery operations system.** There were many words present in both coefficient analysis for positive and negative words, which means that 'delivery' is a feature that can easily influence a user's sentiment. In terms of operations, it is important that there are enough drivers ready and available to complete delivery without any delays. 
 
