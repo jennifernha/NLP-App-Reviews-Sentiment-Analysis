@@ -11,7 +11,7 @@ With this emerging trend, food delivery apps are also booming and offers a more 
 
 ## Business Problem
 The goal of this analysis is to determine what characteristics of Food Delivery apps currently available on the iOS App Store resonate well with the users and what can be improved. Through sentiment analysis of text reviews and their corresponding ratings, we will examine what words are more likely to indicate a positive vs a negative app review.
-The analysis will help our potential client by providing insights into how to develop a strategy for building a new mental health app that can compete with apps that have already seen success.
+The analysis will help our potential client by providing insights into how to develop a strategy for building a new food delivery app that can compete with apps that have already seen success.
 ***
 
 ## Data
